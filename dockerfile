@@ -1,5 +1,5 @@
 # Base image from TileServer GL
-FROM maptiler/tileserver-gl
+FROM klokantech/tileserver-gl
 
 # Copy your MBTiles file into the container
 COPY data/pipeline.mbtiles /data/pipeline.mbtiles
