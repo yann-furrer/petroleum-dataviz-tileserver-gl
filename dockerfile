@@ -4,7 +4,7 @@ FROM klokantech/tileserver-gl
 
 
 # Installer curl en utilisant le gestionnaire de paquets adapté (apk pour Alpine Linux)
-RUN apk add --no-cache curl
+
 
 
 # Ajouter une commande pour télécharger le fichier pipeline.mbtile depuis GitHub
