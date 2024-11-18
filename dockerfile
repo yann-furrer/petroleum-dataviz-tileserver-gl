@@ -11,4 +11,4 @@ ENV TILESERVER_CONFIG=/data/pipeline.mbtiles
 EXPOSE 8080
 
 # Start the TileServer GL
-CMD ["tileserver-gl", "--config", "/data/yourfile.mbtiles"]
+CMD ["tileserver-gl", "--config","--mbtiles", "/data/pipeline.mbtiles"]
