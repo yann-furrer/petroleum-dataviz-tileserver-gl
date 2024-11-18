@@ -1,19 +1,18 @@
-# Base image with TileServer GL
+# Utiliser l'image officielle de TileServer GL
 FROM klokantech/tileserver-gl
 
-# Set the working directory
+# Installer curl pour télécharger le fichier
+RUN apt-get update && apt-get install -y curl && apt-get clean
+
+# Ajouter une commande pour télécharger le fichier pipeline.mbtile depuis GitHub
+# Remplacez `<URL_DU_FICHIER_PIPELINE>` par le lien brut de votre fichier pipeline.mbtile sur GitHub
+RUN curl -L -o /data/pipeline.mbtile 'https://github.com/yann-furrer/petroleum-dataviz-tileserver-gl/blob/main/pipeline.mbtiles'
+
+# Définir le répertoire de travail
 WORKDIR /data
 
-# Clone the GitHub repository and copy the .mbtiles file
-RUN apt-get update && apt-get install -y git \
-    && git clone https://github.com/yann-furrer/petroleum-dataviz-tileserver-gl.git /tmp/repo \
-    && cp /tmp/repo/pipeline.mbtiles /pipeline.mbtiles \
-    && rm -rf /tmp/repo \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-# Expose the default port for TileServer GL
+# Exposer le port 80 pour le service
 EXPOSE 80
 
-# Start the TileServer GL
-CMD ["tileserver-gl", "--config", "/data/config.json", "--port", "80", '--mbtiles', "pipeline.mbtiles"]
+# Commande pour démarrer le serveur avec l'option --mbtiles et le fichier pipeline.mbtile
+CMD ["tileserver-gl", "--mbtiles", "pipeline.mbtile"]
