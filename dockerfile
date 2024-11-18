@@ -108,12 +108,11 @@ COPY --from=builder /usr/src/app /usr/src/app
 COPY . /usr/src/app
 
 RUN mkdir -p /data && chown node:node /data
-VOLUME /data
+
 WORKDIR /data
 
 # Téléchargement du fichier pipeline.mbtile
 RUN curl -fsSL -o /data/pipeline.mbtile https://github.com/yann-furrer/petroleum-dataviz-tileserver-gl/blob/main/pipeline.mbtiles
-
 EXPOSE 8080
 
 USER node:node
