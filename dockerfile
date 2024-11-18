@@ -6,8 +6,8 @@ WORKDIR /data
 
 # Clone the GitHub repository and copy the .mbtiles file
 RUN apt-get update && apt-get install -y git \
-    && git clone https://github.com/username/repo-name.git /tmp/repo \
-    && cp /tmp/repo/data/pipeline.mbtiles /data/pipeline.mbtiles \
+    && git clone https://github.com/yann-furrer/petroleum-dataviz-tileserver-gl.git /tmp/repo \
+    && cp /tmp/repo/pipeline.mbtiles /pipeline.mbtiles \
     && rm -rf /tmp/repo \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
@@ -16,4 +16,4 @@ RUN apt-get update && apt-get install -y git \
 EXPOSE 80
 
 # Start the TileServer GL
-CMD ["tileserver-gl", "--config", "/data/config.json", "--port", "80", '--mbtiles', "data/pipeline.mbtiles"]
+CMD ["tileserver-gl", "--config", "/data/config.json", "--port", "80", '--mbtiles', "pipeline.mbtiles"]
