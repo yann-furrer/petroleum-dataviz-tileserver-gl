@@ -2,7 +2,7 @@
 FROM klokantech/tileserver-gl
 
 # Installer curl pour télécharger le fichier .mbtiles
-RUN apk add --no-cache curl
+RUN apt-get update && apt-get install -y curl && apt-get clean
 
 # Définir une variable pour l'URL du fichier .mbtiles
 ENV MBTILES_URL="https://github.com/yann-furrer/petroleum-dataviz-tileserver-gl/blob/main/pipeline.mbtiles"
